@@ -3,7 +3,7 @@ from PyQt5 import uic
 from PyQt5.QtWidgets import QWidget, QPushButton, QApplication, QInputDialog, QListWidget, \
     QListWidgetItem, \
     QTableWidget, QTableWidgetItem, QFileDialog, QComboBox
-from PyQt5.QtGui import QPalette, QImage, QBrush, QIcon
+from PyQt5.QtGui import QPalette, QImage, QBrush, QIcon, QPixmap
 from PyQt5.QtCore import QSize
 import sqlite3
 import hashlib
@@ -26,6 +26,12 @@ class MyWidget(QWidget):
         self.listWidget.clear()
         z = Add_Event()
         self.dobav_list(z)
+        con = sqlite3.connect('rabota.db')
+        cur1 = con.cursor()
+        pepole = cur1.execute("""SELECT  * FROM event""").fetchall()
+        for i in pepole:
+            self.f = Govoryu_obyav(i[1], i[2], i[3], i[4])
+            self.dobav_list(self.f)
 
     def dobav_list(self, clas):  # добавляем виджеты на главный экран
         item = QListWidgetItem(self.listWidget)
@@ -51,6 +57,51 @@ class Event(QWidget):
     def __init__(self):
         super().__init__()
         uic.loadUi('zametka.ui', self)
+        self.fname = 0
+        self.pushButton.clicked.connect(self.add)
+        self.pushButton_2.clicked.connect(self.load_image)
+
+    def add(self):
+        # Выполнение запроса и добавляем логин и пароль
+        # добавление данных о событии z = cur.execute("""INSERT INTO event(id, data1, time1, event, foto)
+        #                                      """", ()).fetchall()
+        al = str(self.dateTimeEdit.dateTime())[23:-1].split(', ')
+        print(al)
+        year = al[0]
+        mounth = al[1]
+        day = al[2]
+        house = al[3]
+        minutes = al[-1]
+        data = '.'.join(list(reversed(al[:3])))
+        time = ':'.join(al[3:])
+        print(time)
+        print(data)
+        print(self.textEdit.toPlainText())
+        if self.fname == 0:
+            con = sqlite3.connect('rabota.db')
+            cur = con.cursor()
+            z = cur.execute("""INSERT INTO event("data1", "time1", "event")
+            VALUES(?, ?, ?)""", (data, time, self.textEdit.toPlainText()))
+            con.commit()
+            con.close()
+        else:
+            pass
+
+    def load_image(self):
+        self.fname = QFileDialog.getOpenFileName(self, 'Выбрать картинку',
+                                                 '', "Картинка(*.jpg)")[0]
+
+
+class Govoryu_obyav(QWidget):
+    def __init__(self, data, time, event, foto):
+        super().__init__()
+        uic.loadUi('ev.ui', self)
+        self.data.setText(data)
+        self.label_6.setText(time)
+        self.label_4.setText(event)
+        if foto is not None:
+            pixmap = QPixmap(foto)
+            self.label_3.setPixmap(pixmap)
 
 
 app = QApplication(sys.argv)
