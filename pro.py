@@ -16,6 +16,7 @@ class MyWidget(QWidget):
         super().__init__()
         uic.loadUi('new_company.ui', self)
         self.evention.clicked.connect(self.super_event)
+        self.add_ev.clicked.connect(self.add_event)
 
     def add_event(self):
         super().__init__()
@@ -28,10 +29,11 @@ class MyWidget(QWidget):
         self.dobav_list(z)
         con = sqlite3.connect('rabota.db')
         cur1 = con.cursor()
-        pepole = cur1.execute("""SELECT  * FROM event""").fetchall()
+        pepole = cur1.execute("""SELECT * FROM event""").fetchall()
         for i in pepole:
             self.f = Govoryu_obyav(i[1], i[2], i[3], i[4])
             self.dobav_list(self.f)
+        self.listWidget.update()
 
     def dobav_list(self, clas):  # добавляем виджеты на главный экран
         item = QListWidgetItem(self.listWidget)
@@ -62,9 +64,6 @@ class Event(QWidget):
         self.pushButton_2.clicked.connect(self.load_image)
 
     def add(self):
-        # Выполнение запроса и добавляем логин и пароль
-        # добавление данных о событии z = cur.execute("""INSERT INTO event(id, data1, time1, event, foto)
-        #                                      """", ()).fetchall()
         al = str(self.dateTimeEdit.dateTime())[23:-1].split(', ')
         print(al)
         year = al[0]
@@ -84,12 +83,21 @@ class Event(QWidget):
             VALUES(?, ?, ?)""", (data, time, self.textEdit.toPlainText()))
             con.commit()
             con.close()
+            self.hide()
         else:
-            pass
+            con = sqlite3.connect('rabota.db')
+            cur = con.cursor()
+            z = cur.execute("""INSERT INTO event("data1", "time1", "event" , "foto")
+                      VALUES(?, ?, ?, ?)""", (data, time, self.textEdit.toPlainText(), self.fname))
+            con.commit()
+            con.close()
+            self.hide()
 
     def load_image(self):
         self.fname = QFileDialog.getOpenFileName(self, 'Выбрать картинку',
                                                  '', "Картинка(*.jpg)")[0]
+        pixmap = QPixmap(self.fname)
+        self.label_2.setPixmap(pixmap)
 
 
 class Govoryu_obyav(QWidget):
