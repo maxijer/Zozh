@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>678</width>
-    <height>514</height>
+    <height>557</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -19,7 +19,7 @@
      <x>190</x>
      <y>20</y>
      <width>471</width>
-     <height>471</height>
+     <height>521</height>
     </rect>
    </property>
   </widget>
@@ -29,7 +29,7 @@
      <x>10</x>
      <y>18</y>
      <width>160</width>
-     <height>471</height>
+     <height>521</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
@@ -55,7 +55,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>баллы</string>
+       <string>Баллы</string>
       </property>
      </widget>
     </item>
@@ -81,7 +81,7 @@
        </sizepolicy>
       </property>
       <property name="text">
-       <string>мой рейтинг</string>
+       <string>Мой рейтинг</string>
       </property>
      </widget>
     </item>
@@ -121,6 +121,19 @@
       </property>
       <property name="text">
        <string>Добавить мероприятия</string>
+      </property>
+     </widget>
+    </item>
+    <item>
+     <widget class="QPushButton" name="add_challenge">
+      <property name="sizePolicy">
+       <sizepolicy hsizetype="Minimum" vsizetype="Expanding">
+        <horstretch>0</horstretch>
+        <verstretch>0</verstretch>
+       </sizepolicy>
+      </property>
+      <property name="text">
+       <string>Добавить chalenge</string>
       </property>
      </widget>
     </item>

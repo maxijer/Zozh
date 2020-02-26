@@ -17,11 +17,26 @@ class MyWidget(QWidget):
         uic.loadUi('new_company.ui', self)
         self.evention.clicked.connect(self.super_event)
         self.add_ev.clicked.connect(self.add_event)
+        self.add_challenge.clicked.connect(self.add_challenge1)
+        self.pushButton_7.clicked.connect(self.my_challenge)
+
+    def add_challenge1(self):
+        self.z = Challenge()
+        self.z.show()
 
     def add_event(self):
-        super().__init__()
         self.z = Event()
         self.z.show()
+
+    def my_challenge(self):
+        con = sqlite3.connect('rabota.db')
+        cur1 = con.cursor()
+        pepole = cur1.execute("""SELECT * FROM challenge""").fetchall()
+        self.listWidget.clear()
+        for i in pepole:
+            z = Dostal_challenge(i[1])
+            self.dobav_list(z)
+        print(pepole)
 
     def super_event(self):
         self.listWidget.clear()
@@ -110,6 +125,30 @@ class Govoryu_obyav(QWidget):
         if foto is not None:
             pixmap = QPixmap(foto)
             self.label_3.setPixmap(pixmap)
+
+
+class Challenge(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('add_challenge.ui', self)
+        self.pushButton.clicked.connect(self.dobavim_challenge)
+
+    def dobavim_challenge(self):
+        con = sqlite3.connect('rabota.db')
+        cur = con.cursor()
+        z = cur.execute("""INSERT INTO challenge("opis")
+                             VALUES(?)""",
+                        (self.textEdit.toPlainText(),))
+        con.commit()
+        con.close()
+        self.hide()
+
+
+class Dostal_challenge(QWidget):
+    def __init__(self, shto):
+        super().__init__()
+        uic.loadUi('challenge.ui', self)
+        self.label.setText(str(shto))
 
 
 app = QApplication(sys.argv)
