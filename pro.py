@@ -10,19 +10,11 @@ import hashlib
 import random
 import csv
 
-znach = ''
-count_for_play = 0
-true_otw = 0
-flag = False
-korzina = list()
-titeks = list()
-sravnenie = list()
-
 
 class MyWidget(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('avtorization.ui', self)
+        uic.loadUi('new_company.ui', self)
 
 
 app = QApplication(sys.argv)
