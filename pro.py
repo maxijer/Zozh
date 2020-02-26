@@ -14,6 +14,71 @@ import csv
 class MyWidget(QWidget):
     def __init__(self):
         super().__init__()
+        uic.loadUi('avtorization.ui', self)
+        palette = QPalette()
+        oImage = QImage("й.jpg")
+        palette.setBrush(QPalette.Window, QBrush(oImage))
+        self.setPalette(palette)
+        self.registrate.clicked.connect(self.registrated)
+        self.login.clicked.connect(self.whod)
+        self.setWindowTitle('Авторизация')
+
+    def registrated(self):  ## функция регистрации пользователей
+        z = self.login1.text()
+        w = self.password.text()
+        has = hashlib.md5(w.encode('utf-8')).hexdigest()
+        if len(z) == 0 or len(w) == 0:
+            i, okBtnPressed = QInputDialog.getText(self, "Поле", "Придумайте новый пароль")
+        else:
+            con = sqlite3.connect('rabota.db')
+
+            cur1 = con.cursor()
+            pepole = cur1.execute("""SELECT  id FROM users
+            WHERE login = ?""", (z,)).fetchall()
+            if len(pepole) == 0:
+                try:
+                    # Создание курсора
+                    cur = con.cursor()
+
+                    # Выполнение запроса и добавляем логин и пароль
+                    cur.execute("""INSERT INTO users("login", "password") VALUES(?, ?)
+                                    """, (z, has))
+                    con.commit()
+                    con.close()
+                    i, okBtnPressed = QInputDialog.getText(self, "Регистрация",
+                                                           "Пользователь успешно зарегистрирован")
+                except sqlite3.IntegrityError:
+                    i, okBtnPressed = QInputDialog.getText(self, "Пароль", "Придумайте новый пароль")
+            else:
+                i, okBtnPressed = QInputDialog.getText(self, "Такой пользователь уже существует",
+                                                       "придумайте другой логин")
+
+    def whod(self):  ## функция для проверки и входа в систему
+        z = self.login1.text()
+        w = self.password.text()
+        has = hashlib.md5(w.encode('utf-8')).hexdigest()
+        con = sqlite3.connect('rabota.db')
+
+        # Создание курсора
+        cur = con.cursor()
+
+        # Выполнение запроса и добавляем логин и пароль
+        z = cur.execute("""SELECT login, password FROM users
+        WHERE login = ? AND password = ?
+                               """, (z, has)).fetchall()
+        con.close()
+        if len(z) == 0:
+            i, okBtnPressed = QInputDialog.getText(self, "Ошибка",
+                                                   "Пользователь не зарегистрирован")
+        else:
+            self.new = SecondWidget()
+            self.new.show()
+            self.hide()
+
+
+class SecondWidget(QWidget):
+    def __init__(self):
+        super().__init__()
         uic.loadUi('new_company.ui', self)
         self.evention.clicked.connect(self.super_event)
         self.add_ev.clicked.connect(self.add_event)
