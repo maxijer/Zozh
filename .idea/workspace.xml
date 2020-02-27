@@ -3,11 +3,10 @@
   <component name="ChangeListManager">
     <list default="true" id="6d103586-70c6-429d-8707-300e4740acc3" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/add_challenge.ui" beforeDir="false" afterPath="$PROJECT_DIR$/add_challenge.ui" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/challenge.ui" beforeDir="false" afterPath="$PROJECT_DIR$/challenge.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/all.ui" beforeDir="false" afterPath="$PROJECT_DIR$/data/all.ui" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/data/avtorization1.ui" beforeDir="false" afterPath="$PROJECT_DIR$/data/avtorization1.ui" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pro.py" beforeDir="false" afterPath="$PROJECT_DIR$/pro.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rabota.db" beforeDir="false" afterPath="$PROJECT_DIR$/rabota.db" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/zametka.ui" beforeDir="false" afterPath="$PROJECT_DIR$/zametka.ui" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -65,6 +64,28 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
+    <configuration name="blas" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
+      <module name="untitled2" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <EXTENSION ID="PythonCoverageRunConfigurationExtension" runner="coverage.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/blas.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
     <configuration name="pro" type="PythonConfigurationType" factoryName="Python" temporary="true" nameIsGenerated="true">
       <module name="untitled2" />
       <option name="INTERPRETER_OPTIONS" value="" />
@@ -112,6 +133,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="Python.pro" />
+        <item itemvalue="Python.blas" />
         <item itemvalue="Python.ьфыеук" />
         <item itemvalue="Python.string1" />
       </list>
@@ -145,7 +167,7 @@
       <workItem from="1582712283654" duration="610000" />
       <workItem from="1582713074528" duration="14662000" />
       <workItem from="1582728051660" duration="822000" />
-      <workItem from="1582735766961" duration="12929000" />
+      <workItem from="1582735766961" duration="20353000" />
     </task>
     <servers />
   </component>
@@ -153,38 +175,38 @@
     <option name="version" value="1" />
   </component>
   <component name="WindowStateProjectService">
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1582784643271">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom" timestamp="1582799762581">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1582784643271" />
-    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1582784643271">
+    <state width="1323" height="179" key="GridCell.Tab.0.bottom/0.40.1366.728@0.40.1366.728" timestamp="1582799762581" />
+    <state width="1323" height="179" key="GridCell.Tab.0.center" timestamp="1582799762580">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1582784643271" />
-    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1582784643271">
+    <state width="1323" height="179" key="GridCell.Tab.0.center/0.40.1366.728@0.40.1366.728" timestamp="1582799762580" />
+    <state width="1323" height="179" key="GridCell.Tab.0.left" timestamp="1582799762580">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1582784643271" />
-    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1582784643271">
+    <state width="1323" height="179" key="GridCell.Tab.0.left/0.40.1366.728@0.40.1366.728" timestamp="1582799762580" />
+    <state width="1323" height="179" key="GridCell.Tab.0.right" timestamp="1582799762581">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="179" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1582784643271" />
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1582728010644">
+    <state width="1323" height="179" key="GridCell.Tab.0.right/0.40.1366.728@0.40.1366.728" timestamp="1582799762581" />
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom" timestamp="1582799159997">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1582728010644" />
-    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1582728010644">
+    <state width="1323" height="223" key="GridCell.Tab.1.bottom/0.40.1366.728@0.40.1366.728" timestamp="1582799159997" />
+    <state width="1323" height="223" key="GridCell.Tab.1.center" timestamp="1582799159997">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1582728010644" />
-    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1582728010644">
+    <state width="1323" height="223" key="GridCell.Tab.1.center/0.40.1366.728@0.40.1366.728" timestamp="1582799159997" />
+    <state width="1323" height="223" key="GridCell.Tab.1.left" timestamp="1582799159997">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1582728010644" />
-    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1582728010644">
+    <state width="1323" height="223" key="GridCell.Tab.1.left/0.40.1366.728@0.40.1366.728" timestamp="1582799159997" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right" timestamp="1582799159997">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
-    <state width="1323" height="223" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1582728010644" />
+    <state width="1323" height="223" key="GridCell.Tab.1.right/0.40.1366.728@0.40.1366.728" timestamp="1582799159997" />
     <state x="184" y="47" key="SettingsEditor" timestamp="1582655038372">
       <screen x="0" y="40" width="1366" height="728" />
     </state>
@@ -199,8 +221,9 @@
     <state x="379" y="229" key="com.intellij.ide.util.TipDialog/0.40.1366.728@0.40.1366.728" timestamp="1582735766561" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/untitled2$blas.coverage" NAME="blas Coverage Results" MODIFIED="1582796003598" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
     <SUITE FILE_PATH="coverage/untitled2$string1.coverage" NAME="string1 Coverage Results" MODIFIED="1582715346226" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$USER_HOME$/AppData/Local/Temp/Rar$DIa10468.32897" />
     <SUITE FILE_PATH="coverage/untitled2$.coverage" NAME="ьфыеук Coverage Results" MODIFIED="1582749890665" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
-    <SUITE FILE_PATH="coverage/untitled2$pro.coverage" NAME="pro Coverage Results" MODIFIED="1582784643259" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
+    <SUITE FILE_PATH="coverage/untitled2$pro.coverage" NAME="pro Coverage Results" MODIFIED="1582799762567" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="coverage.py" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" />
   </component>
 </project>

@@ -27,15 +27,15 @@ class MyWidget(QWidget):
             con = sqlite3.connect('rabota.db')
 
             cur1 = con.cursor()
-            pepole = cur1.execute("""SELECT  id FROM users
-            WHERE login = ?""", (z,)).fetchall()
+            pepole = cur1.execute("""SELECT number1 FROM users
+            WHERE ID = ?""", (z,)).fetchall()
             if len(pepole) == 0:
                 try:
                     # Создание курсора
                     cur = con.cursor()
 
                     # Выполнение запроса и добавляем логин и пароль
-                    cur.execute("""INSERT INTO users("login", "password") VALUES(?, ?)
+                    cur.execute("""INSERT INTO users("ID", "password") VALUES(?, ?)
                                     """, (z, has))
                     con.commit()
                     con.close()
@@ -58,8 +58,8 @@ class MyWidget(QWidget):
         cur = con.cursor()
 
         # Выполнение запроса и добавляем логин и пароль
-        z = cur.execute("""SELECT login, password FROM users
-        WHERE login = ? AND password = ?
+        z = cur.execute("""SELECT ID, password FROM users
+        WHERE ID = ? AND password = ?
                                """, (z, has)).fetchall()
         con.close()
         if len(z) == 0:
@@ -91,6 +91,11 @@ class SecondWidget(QWidget):
         self.pushButton_5.clicked.connect(self.chalenge)
         self.pushButton_7.clicked.connect(self.add_event)
         self.pushButton_4.clicked.connect(self.super_event)
+        self.pushButton_3.clicked.connect(self.dobavim_raiting)
+
+    def dobavim_raiting(self):
+        self.mast = I_am_reiting()
+        self.dobav_list(self.mast)
 
     def super_event(self):
         self.listWidget.clear()
@@ -126,6 +131,31 @@ class SecondWidget(QWidget):
         self.listWidget.addItem(item)
         self.listWidget.setItemWidget(item, self.mywid)
         item.setSizeHint(self.mywid.size())
+
+
+class I_am_reiting(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('data/tabel.ui', self)
+        con = sqlite3.connect('rabota.db')
+        cur1 = con.cursor()
+        pepole = cur1.execute("""SELECT * FROM users""").fetchall()
+        reader = list()
+        for i in pepole:
+            z = (i[1], i[3], i[4], i[5], i[6])
+            reader.append(z)
+        reader = sorted(reader, key=lambda x: x[1])
+        self.tableWidget.setRowCount(len(reader))
+        self.tableWidget.setColumnCount(len(reader[0]))
+        # Заполнили размеры таблицы
+        self.tableWidget.setHorizontalHeaderLabels(
+            ['ID', 'Балы', 'роль', 'И.Ф.О', 'Должность'])
+        w = 0
+        # Заполнили таблицу полученными элементами
+        for k in range(len(reader)):
+            for i, elem in enumerate(list(reader[k])):
+                self.tableWidget.setItem(w, i, QTableWidgetItem(str(elem)))
+            w += 1
 
 
 class No_registr(QWidget):
