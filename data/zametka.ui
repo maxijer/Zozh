@@ -7,7 +7,7 @@
     <x>0</x>
     <y>0</y>
     <width>584</width>
-    <height>572</height>
+    <height>651</height>
    </rect>
   </property>
   <property name="windowTitle">
@@ -16,9 +16,9 @@
   <widget class="QDateTimeEdit" name="dateTimeEdit">
    <property name="geometry">
     <rect>
-     <x>340</x>
+     <x>360</x>
      <y>30</y>
-     <width>231</width>
+     <width>211</width>
      <height>61</height>
     </rect>
    </property>
@@ -55,7 +55,7 @@ color: #FFFFFF;
    <property name="geometry">
     <rect>
      <x>30</x>
-     <y>150</y>
+     <y>190</y>
      <width>531</width>
      <height>301</height>
     </rect>
@@ -93,7 +93,7 @@ color: (0, 0, 0);
    <property name="geometry">
     <rect>
      <x>34</x>
-     <y>480</y>
+     <y>530</y>
      <width>251</width>
      <height>71</height>
     </rect>
@@ -127,7 +127,7 @@ color: #FFFFFF;
 </string>
    </property>
    <property name="text">
-    <string>Добавить мероприятие</string>
+    <string>Добавить в расписание</string>
    </property>
   </widget>
   <widget class="QLabel" name="label">
@@ -152,8 +152,8 @@ color: #FFFFFF;
     <rect>
      <x>20</x>
      <y>10</y>
-     <width>291</width>
-     <height>111</height>
+     <width>321</width>
+     <height>151</height>
     </rect>
    </property>
    <property name="text">
@@ -164,7 +164,7 @@ color: #FFFFFF;
    <property name="geometry">
     <rect>
      <x>300</x>
-     <y>480</y>
+     <y>530</y>
      <width>261</width>
      <height>71</height>
     </rect>

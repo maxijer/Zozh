@@ -7,6 +7,8 @@ from PyQt5.QtGui import QPalette, QImage, QBrush, QIcon, QPixmap
 import sqlite3
 import hashlib
 
+login = ''
+
 
 class MyWidget(QWidget):
     def __init__(self):
@@ -66,9 +68,52 @@ class MyWidget(QWidget):
             self.w = No_registr()
             self.w.show()
         else:
+            global login
+            login = z
             self.new = SecondWidget()
             self.new.show()
             self.hide()
+
+
+class My_prof(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('data/my_profile.ui', self)
+        self.pushButton.clicked.connect(self.add_foto)
+        self.information()
+
+    def add_foto(self):
+        global login
+        self.fname = QFileDialog.getOpenFileName(self, 'Выбрать картинку',
+                                                 '', "Картинка(*.jpg)")[0]
+        pixmap = QPixmap(self.fname)
+        self.label.setPixmap(pixmap)
+        con = sqlite3.connect('rabota.db')
+        cur = con.cursor()
+        z = cur.execute("""UPDATE users SET "foto" = ? WHERE ID = ?""", (self.fname, str(login)))
+        con.commit()
+        con.close()
+
+    def information(self):
+        global login
+        con = sqlite3.connect('rabota.db')
+
+        # Создание курсора
+        cur = con.cursor()
+
+        # Выполнение запроса и добавляем логин и пароль
+        z = cur.execute("""SELECT * FROM users
+                                               """).fetchall()
+        print(z)
+        self.label_6.setText(z[0][1])
+        self.label_7.setText(str(z[0][3]))
+        self.label_5.setText(str(z[0][-1]))
+        print(z[0][7])
+        if z[0][7] is not None:
+            pixmap = QPixmap(z[0][7])
+            self.label.setPixmap(pixmap)
+
+        con.close()
 
 
 class OK(QWidget):
@@ -92,8 +137,15 @@ class SecondWidget(QWidget):
         self.pushButton_7.clicked.connect(self.add_event)
         self.pushButton_4.clicked.connect(self.super_event)
         self.pushButton_3.clicked.connect(self.dobavim_raiting)
+        self.pushButton_6.clicked.connect(self.check_me)
+
+    def check_me(self):
+        self.listWidget.clear()
+        self.z = My_prof()
+        self.dobav_list(self.z)
 
     def dobavim_raiting(self):
+        self.listWidget.clear()
         self.mast = I_am_reiting()
         self.dobav_list(self.mast)
 
@@ -144,12 +196,12 @@ class I_am_reiting(QWidget):
         for i in pepole:
             z = (i[1], i[3], i[4], i[5], i[6])
             reader.append(z)
-        reader = sorted(reader, key=lambda x: x[1])
+        reader = sorted(reader, key=lambda x: (- x[1], x[2]))
         self.tableWidget.setRowCount(len(reader))
         self.tableWidget.setColumnCount(len(reader[0]))
         # Заполнили размеры таблицы
         self.tableWidget.setHorizontalHeaderLabels(
-            ['ID', 'Балы', 'роль', 'И.Ф.О', 'Должность'])
+            ['ID', 'Балы', 'роль', 'Ф.И.О', 'Должность'])
         w = 0
         # Заполнили таблицу полученными элементами
         for k in range(len(reader)):
