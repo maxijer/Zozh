@@ -4,21 +4,14 @@ from PyQt5.QtWidgets import QWidget, QPushButton, QApplication, QInputDialog, QL
     QListWidgetItem, \
     QTableWidget, QTableWidgetItem, QFileDialog, QComboBox
 from PyQt5.QtGui import QPalette, QImage, QBrush, QIcon, QPixmap
-from PyQt5.QtCore import QSize
 import sqlite3
 import hashlib
-import random
-import csv
 
 
 class MyWidget(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('avtorization.ui', self)
-        palette = QPalette()
-        oImage = QImage("й.jpg")
-        palette.setBrush(QPalette.Window, QBrush(oImage))
-        self.setPalette(palette)
+        uic.loadUi('data/avtorization1.ui', self)
         self.registrate.clicked.connect(self.registrated)
         self.login.clicked.connect(self.whod)
         self.setWindowTitle('Авторизация')
@@ -28,7 +21,8 @@ class MyWidget(QWidget):
         w = self.password.text()
         has = hashlib.md5(w.encode('utf-8')).hexdigest()
         if len(z) == 0 or len(w) == 0:
-            i, okBtnPressed = QInputDialog.getText(self, "Поле", "Придумайте новый пароль")
+            self.h = Nelza()
+            self.h.show()
         else:
             con = sqlite3.connect('rabota.db')
 
@@ -45,13 +39,14 @@ class MyWidget(QWidget):
                                     """, (z, has))
                     con.commit()
                     con.close()
-                    i, okBtnPressed = QInputDialog.getText(self, "Регистрация",
-                                                           "Пользователь успешно зарегистрирован")
+                    self.h = OK()
+                    self.h.show()
                 except sqlite3.IntegrityError:
-                    i, okBtnPressed = QInputDialog.getText(self, "Пароль", "Придумайте новый пароль")
+                    self.w = Nelza()
+                    self.w.show()
             else:
-                i, okBtnPressed = QInputDialog.getText(self, "Такой пользователь уже существует",
-                                                       "придумайте другой логин")
+                self.w = Nelza()
+                self.w.show()
 
     def whod(self):  ## функция для проверки и входа в систему
         z = self.login1.text()
@@ -68,32 +63,54 @@ class MyWidget(QWidget):
                                """, (z, has)).fetchall()
         con.close()
         if len(z) == 0:
-            i, okBtnPressed = QInputDialog.getText(self, "Ошибка",
-                                                   "Пользователь не зарегистрирован")
+            self.w = No_registr()
+            self.w.show()
         else:
             self.new = SecondWidget()
             self.new.show()
             self.hide()
 
 
+class OK(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('data/OK.ui', self)
+
+
+class Nelza(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('data/nelza.ui', self)
+
+
 class SecondWidget(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('new_company.ui', self)
-        self.evention.clicked.connect(self.super_event)
-        self.add_ev.clicked.connect(self.add_event)
-        self.add_challenge.clicked.connect(self.add_challenge1)
-        self.pushButton_7.clicked.connect(self.my_challenge)
+        uic.loadUi('data/all.ui', self)
+        self.pushButton_8.clicked.connect(self.add_challenge1)
+        self.pushButton_5.clicked.connect(self.chalenge)
+        self.pushButton_7.clicked.connect(self.add_event)
+        self.pushButton_4.clicked.connect(self.super_event)
+
+    def super_event(self):
+        self.listWidget.clear()
+        con = sqlite3.connect('rabota.db')
+        cur1 = con.cursor()
+        pepole = cur1.execute("""SELECT * FROM event""").fetchall()
+        for i in pepole:
+            self.f = Govoryu_obyav(i[1], i[2], i[3], i[4])
+            self.dobav_list(self.f)
+        self.listWidget.update()
+
+    def add_event(self):
+        self.h = Event()
+        self.h.show()
 
     def add_challenge1(self):
         self.z = Challenge()
         self.z.show()
 
-    def add_event(self):
-        self.z = Event()
-        self.z.show()
-
-    def my_challenge(self):
+    def chalenge(self):
         con = sqlite3.connect('rabota.db')
         cur1 = con.cursor()
         pepole = cur1.execute("""SELECT * FROM challenge""").fetchall()
@@ -103,18 +120,6 @@ class SecondWidget(QWidget):
             self.dobav_list(z)
         print(pepole)
 
-    def super_event(self):
-        self.listWidget.clear()
-        z = Add_Event()
-        self.dobav_list(z)
-        con = sqlite3.connect('rabota.db')
-        cur1 = con.cursor()
-        pepole = cur1.execute("""SELECT * FROM event""").fetchall()
-        for i in pepole:
-            self.f = Govoryu_obyav(i[1], i[2], i[3], i[4])
-            self.dobav_list(self.f)
-        self.listWidget.update()
-
     def dobav_list(self, clas):  # добавляем виджеты на главный экран
         item = QListWidgetItem(self.listWidget)
         self.mywid = clas
@@ -123,10 +128,16 @@ class SecondWidget(QWidget):
         item.setSizeHint(self.mywid.size())
 
 
+class No_registr(QWidget):
+    def __init__(self):
+        super().__init__()
+        uic.loadUi('No_registration.ui', self)
+
+
 class Add_Event(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('add_event.ui', self)
+        uic.loadUi('data/add_event.ui', self)
         self.pushButton.clicked.connect(self.prikol)
 
     def prikol(self):
@@ -138,24 +149,15 @@ class Add_Event(QWidget):
 class Event(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('zametka.ui', self)
+        uic.loadUi('data/zametka.ui', self)
         self.fname = 0
         self.pushButton.clicked.connect(self.add)
         self.pushButton_2.clicked.connect(self.load_image)
 
     def add(self):
         al = str(self.dateTimeEdit.dateTime())[23:-1].split(', ')
-        print(al)
-        year = al[0]
-        mounth = al[1]
-        day = al[2]
-        house = al[3]
-        minutes = al[-1]
         data = '.'.join(list(reversed(al[:3])))
         time = ':'.join(al[3:])
-        print(time)
-        print(data)
-        print(self.textEdit.toPlainText())
         if self.fname == 0:
             con = sqlite3.connect('rabota.db')
             cur = con.cursor()
@@ -183,10 +185,10 @@ class Event(QWidget):
 class Govoryu_obyav(QWidget):
     def __init__(self, data, time, event, foto):
         super().__init__()
-        uic.loadUi('ev.ui', self)
+        uic.loadUi('data/event.ui', self)
         self.data.setText(data)
-        self.label_6.setText(time)
-        self.label_4.setText(event)
+        self.label_7.setText(time)
+        self.label_6.setText(event)
         if foto is not None:
             pixmap = QPixmap(foto)
             self.label_3.setPixmap(pixmap)
@@ -195,8 +197,9 @@ class Govoryu_obyav(QWidget):
 class Challenge(QWidget):
     def __init__(self):
         super().__init__()
-        uic.loadUi('add_challenge.ui', self)
+        uic.loadUi('data/add_challenge.ui', self)
         self.pushButton.clicked.connect(self.dobavim_challenge)
+        self.pushButton_2.clicked.connect(self.delitnem)
 
     def dobavim_challenge(self):
         con = sqlite3.connect('rabota.db')
@@ -208,11 +211,14 @@ class Challenge(QWidget):
         con.close()
         self.hide()
 
+    def delitnem(self):
+        self.textEdit.clear()
+
 
 class Dostal_challenge(QWidget):
     def __init__(self, shto):
         super().__init__()
-        uic.loadUi('challenge.ui', self)
+        uic.loadUi('data/challenge.ui', self)
         self.label.setText(str(shto))
 
 
